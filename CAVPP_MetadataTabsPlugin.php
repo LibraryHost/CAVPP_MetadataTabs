@@ -14,8 +14,8 @@
 			
 			$item = $args['item'];
 			$tabs[__('Descriptive / Administrative Metadata')] = $this->_descAdminForm($item);			
-			$tabs[__('Original Copy Metadata')] = $this->_origCopyForm($item); */
-			$tabs[__('Vendor Metadata')] = $this->_vendorForm($item); */
+			$tabs[__('Original Copy Metadata')] = $this->_origCopyForm($item);
+			$tabs[__('Vendor Metadata')] = $this->_vendorForm($item);
 			
 			return $tabs;
         }
