@@ -20,7 +20,7 @@
 			return $tabs;
         }
 		
-		protected function _descAadminForm($item)
+		protected function _descAdminForm($item)
 		{
 			
 			$elementsTable = get_db()->getTable('Element');
