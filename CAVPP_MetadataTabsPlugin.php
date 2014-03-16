@@ -13,131 +13,140 @@
 			unset($tabs['PBCore']);
 			
 			$item = $args['item'];
-			/* $tabs[__('Physical Instantiation')] = $this->_physinstForm($item); */
-			/* $tabs[__('Vendor Data')] = $this->_vendorForm($item); */
-			$tabs[__('Admin Data')] = $this->_adminForm($item);			
+			$tabs[__('Descriptive / Administrative Metadata')] = $this->_descAdminForm($item);			
+			$tabs[__('Original Copy Metadata')] = $this->_origCopyForm($item); */
+			$tabs[__('Vendor Metadata')] = $this->_vendorForm($item); */
 			
 			return $tabs;
         }
 		
-	
-		/**
-		* Each time we save an item, post it to the Internet Archive.
-		*
-		* @return void
-		*/
-		/* 
-		private function _beamia_form()
-		{
-			$item = get_current_record('item');
-
-			$output = '';
-
-			$output .= '<div>' . __("If the box at the bottom of the files tab is checked, the files in this item, along with their metadata, will upload to the Internet Archive upon save.") . '</div><br />' . PHP_EOL;
-			$output .= '<div>' . __("Note that BeamMeUp may make saving an item take a while, and that it may take additional time for the Internet Archive to post the files after you save.") . '</div><br />' . PHP_EOL;
-			$output .= '<div>' . __("To change the upload default or to alter the upload's configuration, visit the plugin's configuration settings on this site.") . '</div><br />' . PHP_EOL;
-			$output .= $this->_warnAccountConfiguration();
-			if (metadata($item, 'id') == '') {
-				$output .= '<div>' . __('Please revisit this tab after you save the item to view its Internet Archive links.') . '</div><br />' . PHP_EOL;
-			}
-			else {
-				$output .= $this->_listInternetArchiveLinks($item, true);
-				$output .= $this->_listInternetArchiveLinksForFiles($item);
-			}
-
-			return $output;
-		} 
-		*/
-	
-		protected function _adminForm($item)
+		protected function _descAadminForm($item)
 		{
 			
 			$elementsTable = get_db()->getTable('Element');
-			$elements[] = $elementsTable->findByElementSetNameAndElementName('PBCore', 'Title');
              
             $elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Institution');
 			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Institution URL');
 			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Institution Call Number');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Title');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Additional Title');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Series Title');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Label');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Description or Content Summary');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Why is this important to California history?');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Date Created');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Date Published');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Country of Creation');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Director');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Interviewer');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Performer');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Producer');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Camera');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Cast');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Editor');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Interviewee');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Music');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Sound');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Speaker');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Publisher');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Distributor');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Copyright Statement');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Language');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Subject Topic');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Subject Entity');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Spatial Coverage');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Temporal Coverage');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Genre');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Cataloger Notes');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Additional Descriptive Notes for Work');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Additional Technical Notes for Work');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Collection Guide Title');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Collection Guide URL');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Internet Archive URL');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Object Identifier');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Project Identifier');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Asset Type');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Object ARK');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Institution ARK');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'CAVPP Quality Control Notes');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Partner Quality Control Notes');			
 			
 			$html = element_form($elements,$item);
 			
 			return $html;
 		}
 		
-		/* 
-		protected function _mapForm($item, $label = 'Find a Location by Address:', $confirmLocationChange = true,  $post = null)
+		protected function _origCopyForm($item)
 		{
-			$html = '';
-			$label = __('Find a Location by Address:');
-			$center = $this->_getCenter();
-			$center['show'] = false;
+			
+			$elementsTable = get_db()->getTable('Element');
 
-			$location = $this->_db->getTable('Location')->findLocationByItem($item, true);
-
-			if ($post === null) {
-				$post = $_POST;
-			}
-
-			$usePost = !empty($post) && !empty($post['geolocation']);
-			if ($usePost) {
-				$lng  = (double) @$post['geolocation']['longitude'];
-				$lat  = (double) @$post['geolocation']['latitude'];
-				$zoom = (int) @$post['geolocation']['zoom_level'];
-				$addr = @$post['geolocation']['address'];
-			} else {
-				if ($location) {
-					$lng  = (double) $location['longitude'];
-					$lat  = (double) $location['latitude'];
-					$zoom = (int) $location['zoom_level'];
-					$addr = $location['address'];
-				} else {
-					$lng = $lat = $zoom = $addr = '';
-				}
-			}
-
-			$html .= '<div class="field">';
-			$html .=     '<div id="location_form" class="two columns alpha">';
-			$html .=         '<input type="hidden" name="geolocation[latitude]" value="' . $lat . '" />';
-			$html .=         '<input type="hidden" name="geolocation[longitude]" value="' . $lng . '" />';
-			$html .=         '<input type="hidden" name="geolocation[zoom_level]" value="' . $zoom . '" />';
-			$html .=         '<input type="hidden" name="geolocation[map_type]" value="Google Maps v' . GOOGLE_MAPS_API_VERSION . '" />';
-			$html .=         '<label>' . html_escape($label) . '</label>';
-			$html .=     '</div>';
-			$html .=     '<div class="inputs five columns omega">';
-			$html .=          '<div class="input-block">';
-			$html .=            '<input type="text" name="geolocation[address]" id="geolocation_address" value="' . $addr . '" class="textinput"/>';
-			$html .=            '<button type="button" style="float:none;" name="geolocation_find_location_by_address" id="geolocation_find_location_by_address">'.__('Find').'</button>';
-			$html .=          '</div>';
-			$html .=     '</div>';
-			$html .= '</div>';
-			$html .= '<div  id="omeka-map-form" style="width: 100%; height: 300px"></div>';
-
-
-			$options = array();
-			$options['form'] = array('id' => 'location_form',
-					'posted' => $usePost);
-			if ($location or $usePost) {
-				$options['point'] = array('latitude' => $lat,
-						'longitude' => $lng,
-						'zoomLevel' => $zoom);
-			}
-
-			$options['confirmLocationChange'] = $confirmLocationChange;
-
-			$center = js_escape($center);
-			$options = js_escape($options);
-
-			$js = "var anOmekaMapForm = new OmekaMapForm(" . js_escape('omeka-map-form') . ", $center, $options);";
-			$js .= "
-				jQuery(document).bind('omeka:tabselected', function () {
-					anOmekaMapForm.resize();
-				});
-			";
-
-			$html .= "<script type='text/javascript'>" . $js . "</script>";
+            $elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Generation (original copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Format (original copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Extent (original copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Duration (original copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Running Speed (original copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Timecode Content Begins (original copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Track Standard (original copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Channel Configuration (original copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Stock Manufacturer (original copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Base Type (original copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Transcript (original copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Silent or Sound (original copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Color and/or Black and White (original copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Aspect Ratio (original copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Subtitles (original copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Intertitles (original copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Closed Captions (original copy)');
+			
+			$html = element_form($elements,$item);
+			
 			return $html;
 		}
-		*/
+		
+		protected function _vendorForm($item)
+		{
+			
+			$elementsTable = get_db()->getTable('Element');
 
-	
+            $elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Digital File Identifier(s) (vendor copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Creation Date (vendor copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Frame Size (vendor copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'File Extension (vendor copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Standard and File Wrapper (vendor copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'File Location (vendor copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Media Type (vendor copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Generations (vendor copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Preservation Filesize');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Access Filesize');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Duration (vendor copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Colors (vendor copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Tracks (vendor copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Channel Configuration (vendor copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Track Type (vendor copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Encoder (vendor copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Sampling Rate (preservation copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Data Rate (preservation copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Frame Rate (preservation copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Bit Depth  (preservation copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Data Compression (preservation copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Sampling Rate (access copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Data Rate (access copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Frame Rate (access copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Bit Depth  (access copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Data Compression (access copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Relationship/Transfer/Vendor/Creation Date');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Preservation File Identifier/MD5/MD5 Date');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Access File Identifier/MD5/MD5 Date');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Creating Application/Version (vendor copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Source Deck Manufacturer/Model (vendor copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Digitizer Manufacturer/Model (vendor copy)');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Technical Evaluation Report');
+			$elements[] = $elementsTable->findByElementSetNameAndElementName('CAVPP_PBCore', 'Vendor Quality Control Notes');
+
+			$html = element_form($elements,$item);
+			
+			return $html;
+		}		
+		
 	}
